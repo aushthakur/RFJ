@@ -59,34 +59,35 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Content Overlay */}
-      <div className="absolute inset-0 flex flex-col justify-center items-start px-8 sm:px-12 lg:px-16">
-        <div className="max-w-2xl">
-          {/* Logo */}
-          <div className="mb-6 ">
-            <img
-              src={logo}
-              alt="Rituals Fine Jewellery Logo"
-              className="h-50 w-auto object-contain mb-4"
-            />
-          </div>
+   {/* Content Overlay */}
+<div className="absolute inset-0 flex flex-col justify-center items-start px-8 sm:px-12 lg:px-16">
+  <div className="max-w-2xl text-left space-y-6">
+    {/* Logo + Brand Name grouped */}
+    <div className="flex flex-col items-start space-y-4">
+      <img
+        src={logo}
+        alt="Rituals Fine Jewellery Logo"
+        className="h-50 w-auto object-contain"
+      />
 
-          {/* Brand Name */}
-          <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-light mb-8 tracking-wider">
-            RITUALS FINE JEWELLERY
-          </h1>
+      {/* Brand Name with creative font */}
+      <h1 className="text-white text-3xl sm:text-5xl lg:text-4xl font-serif tracking-widest leading-snug">
+        RITUALS FINE JEWELLERY
+      </h1>
+    </div>
 
-          {/* CTA Button with Diagonal Shine Animation */}
-          <button className="relative overflow-hidden bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-4 rounded-md text-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-xl group">
-            <span className="relative z-10">Explore Our Latest Collection</span>
-            
-            {/* Diagonal Shine Animation */}
-            <div className="absolute inset-0 -top-2 -bottom-2 w-full">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out animate-shine"></div>
-            </div>
-          </button>
-        </div>
+    {/* CTA Button with Shine Animation */}
+    <button className="relative overflow-hidden bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-4 rounded-md text-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-xl group">
+      <span className="relative z-10">Explore Our Latest Collection</span>
+
+      {/* Shine Animation */}
+      <div className="absolute inset-0 -top-2 -bottom-2 w-full">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out animate-shine"></div>
       </div>
+    </button>
+  </div>
+</div>
+
 
       {/* Carousel Indicators */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
