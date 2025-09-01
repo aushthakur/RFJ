@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./components/navbar";
 import Hero from "./components/hero";
 import CollectionSection from "./components/collectionsection1";
+import TrendingProducts from "./components/trendingproducts";
 
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
       <Navbar />
       <Hero />
       <CollectionSection />
+      <TrendingProducts />
 
      
     </div>
