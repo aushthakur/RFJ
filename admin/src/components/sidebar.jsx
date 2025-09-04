@@ -6,12 +6,14 @@ import {
   ClipboardList, 
   ChevronDown, 
   ChevronRight,
-  Menu,
-  X
+  X,
+  Settings
 } from 'lucide-react';
+import { Link } from "react-router-dom"; // ✅ Added
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [customiseOpen, setCustomiseOpen] = useState(false);
 
   const sidebarItems = [
     {
@@ -38,6 +40,14 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       hasSubmenu: true,
       isOpen: categoriesOpen,
       onClick: () => setCategoriesOpen(!categoriesOpen)
+    },
+    {
+      icon: Settings,
+      label: 'CUSTOMISE PAGE',
+      active: false,
+      hasSubmenu: true,
+      isOpen: customiseOpen,
+      onClick: () => setCustomiseOpen(!customiseOpen)
     }
   ];
 
@@ -62,7 +72,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div className="flex items-center space-x-2">
             <div className="bg-white rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm"><img src={logo} alt="Logo" className="w-9 h-10 " /></span>
+              <span className="text-white font-bold text-sm">
+                <img src={logo} alt="Logo" className="w-9 h-10 " />
+              </span>
             </div>
           </div>
           <button 
@@ -110,7 +122,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               </div>
               
               {/* Submenu for Categories */}
-              {item.hasSubmenu && item.isOpen && (
+              {item.label === 'Categories' && item.isOpen && (
                 <div className="ml-8 mt-1 space-y-1">
                   <div className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded cursor-pointer">
                     Electronics
@@ -120,6 +132,18 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   </div>
                   <div className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded cursor-pointer">
                     Books
+                  </div>
+                </div>
+              )}
+
+              {/* Submenu for Customise Page */}
+              {item.label === 'CUSTOMISE PAGE' && item.isOpen && (
+                <div className="ml-8 mt-1 space-y-1">
+                  <div className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded cursor-pointer">
+                    Home Page
+                  </div>
+                  <div className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded cursor-pointer">
+                    <Link to="/customize/home/hero">Hero Section</Link>
                   </div>
                 </div>
               )}

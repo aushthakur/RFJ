@@ -3,6 +3,7 @@ import Login from "./components/login";
 import Dashboard from "./components/dashboard";
 import Sidebar from "./components/sidebar";
 import Topbar from "./components/topbar";
+import CarouselManager from "./components/pages/CarouselManager";
 
 function PrivateRoute({ children }) {
   const isAuth = localStorage.getItem("adminAuth");
@@ -35,6 +36,17 @@ function App() {
           <PrivateRoute>
             <AdminLayout>
               <Dashboard />
+            </AdminLayout>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/customize/home/hero"
+        element={
+          <PrivateRoute>
+            <AdminLayout>
+              <CarouselManager />
             </AdminLayout>
           </PrivateRoute>
         }

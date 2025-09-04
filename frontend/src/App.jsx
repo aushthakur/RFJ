@@ -1,14 +1,14 @@
 import React from "react";
-import Navbar from "./components/navbar";
-import Hero from "./components/hero";
-import CollectionSection from "./components/collectionsection1";
-import TrendingProducts from "./components/trendingproducts";
-import Features from "./components/features";
-import AboutSection from "./components/about";
-import FeaturedCollection from "./components/FeaturedCollection";
-import NewArrivals from "./components/NewArrivals";
-import InstagramSection from "./components/InstagramSection";
-import Footer from "./components/footer";
+import Navbar from "./components/Basics/navbar";
+import Hero from "./components/Home/hero";
+import CollectionSection from "./components/Home/collectionsection1";
+import TrendingProducts from "./components/Home/trendingproducts";
+import Features from "./components/Home/features";
+import AboutSection from "./components/Home/about";
+import FeaturedCollection from "./components/Home/FeaturedCollection";
+import NewArrivals from "./components/Home/NewArrivals";
+import InstagramSection from "./components/Home/InstagramSection";
+import Footer from "./components/Basics/footer";
 
 
 const App = () => {
