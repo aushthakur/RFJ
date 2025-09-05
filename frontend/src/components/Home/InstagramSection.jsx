@@ -1,10 +1,10 @@
 import React from "react";
-import insta1 from "../assets/img/insta1.jpeg";
-import insta2 from "../assets/img/insta1.jpeg";
-import insta3 from "../assets/img/insta1.jpeg";
-import insta4 from "../assets/img/insta1.jpeg";
-import insta5 from "../assets/img/insta1.jpeg";
-import insta6 from "../assets/img/insta1.jpeg";
+import insta1 from "../../assets/img/insta1.jpeg";
+import insta2 from "../../assets/img/insta1.jpeg";
+import insta3 from "../../assets/img/insta1.jpeg";
+import insta4 from "../../assets/img/insta1.jpeg";
+import insta5 from "../../assets/img/insta1.jpeg";
+import insta6 from "../../assets/img/insta1.jpeg";
 
 const InstagramSection = () => {
   const posts = [

@@ -1,9 +1,9 @@
 import React from "react";
-import initialImg from "../assets/initial.png"; // large horizontal image
-import bandhanImg from "../assets/bandhan.png";
-import mangalsutraImg from "../assets/mangalsutra.png";
-import expressoImg from "../assets/expresso.png";
-import piqueImg from "../assets/pique.png";
+import initialImg from "../../assets/initial.png"; // large horizontal image
+import bandhanImg from "../../assets/bandhan.png";
+import mangalsutraImg from "../../assets/mangalsutra.png";
+import expressoImg from "../../assets/expresso.png";
+import piqueImg from "../../assets/pique.png";
 
 const NewArrivals = () => {
   return (

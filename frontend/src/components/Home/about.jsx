@@ -1,5 +1,5 @@
 import React from "react";
-import braceletImg from "../assets/img/bracelet.png"; // <-- replace with your image path
+import braceletImg from "../../assets/img/bracelet.png"; // <-- replace with your image path
 
 const AboutSection = () => {
   return (

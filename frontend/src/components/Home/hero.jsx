@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import logo from "../assets/img/logo.png";
+import logo from "../../assets/img/logo.png";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

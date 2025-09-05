@@ -1,7 +1,7 @@
 import React from "react";
-import weddingImg from "../assets/FeaturedCollection/wedding.png";
-import ethnicImg from "../assets/FeaturedCollection/ethnic.png";   
-import diwaliImg from "../assets/FeaturedCollection/diwali.png";   
+import weddingImg from "../../assets/FeaturedCollection/wedding.png";
+import ethnicImg from "../../assets/FeaturedCollection/ethnic.png";   
+import diwaliImg from "../../assets/FeaturedCollection/diwali.png";   
 
 const collections = [
   {

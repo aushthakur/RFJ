@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Search, User, Heart, ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
-import logo from "../assets/img/logo.png"; 
+import logo from "../../assets/img/logo.png"; 
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Best Sellers', href: '#' },
-    { name: 'Earrings', href: '#' },
+    { name: 'Home', href: '.' },
+    { name: 'Best Sellers', href: '/bestseller' },
+    { name: 'Earrings', href: 'earrings' },
     { name: 'Necklaces', href: '#' },
     { name: 'Festive Special', href: '#' },
     { name: 'Categories', href: '#', hasDropdown: true },

@@ -1,8 +1,8 @@
 import React from "react";
-import img1 from "../assets/img/collectionsection1/bangles.png";
-import img2 from "../assets/img/collectionsection1/necklace.png";
-import img3 from "../assets/img/collectionsection1/nathni.png";
-import img4 from "../assets/img/collectionsection1/mangtika.png";
+import img1 from "../../assets/img/collectionsection1/bangles.png";
+import img2 from "../../assets/img/collectionsection1/necklace.png";
+import img3 from "../../assets/img/collectionsection1/nathni.png";
+import img4 from "../../assets/img/collectionsection1/mangtika.png";
 
 const CollectionSection = () => {
   const collections = [

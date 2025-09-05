@@ -2,14 +2,14 @@ import React, { useRef, useState } from "react";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
 
 // product images
-import img1a from "../assets/img/products/prod1a.png";
-import img1b from "../assets/img/products/prod1b.png";
-import img2a from "../assets/img/products/prod2a.png";
-import img2b from "../assets/img/products/prod2b.png";
-import img3a from "../assets/img/products/prod3a.png";
-import img3b from "../assets/img/products/prod3b.png";
-import img4a from "../assets/img/products/prod4a.png";
-import img4b from "../assets/img/products/prod4b.png";
+import img1a from "../../assets/img/products/prod1a.png";
+import img1b from "../../assets/img/products/prod1b.png";
+import img2a from "../../assets/img/products/prod2a.png";
+import img2b from "../../assets/img/products/prod2b.png";
+import img3a from "../../assets/img/products/prod3a.png";
+import img3b from "../../assets/img/products/prod3b.png";
+import img4a from "../../assets/img/products/prod4a.png";
+import img4b from "../../assets/img/products/prod4b.png";
 
 const TrendingProducts = () => {
   const [wishlist, setWishlist] = useState([]);
