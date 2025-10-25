@@ -1,5 +1,6 @@
+// src/components/basics/sidebar.jsx
 import React, { useState } from 'react';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 import { 
   LayoutDashboard, 
   Package, 
@@ -9,7 +10,7 @@ import {
   X,
   Settings
 } from 'lucide-react';
-import { Link } from "react-router-dom"; // ✅ Added
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
@@ -19,24 +20,23 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     {
       icon: LayoutDashboard,
       label: 'DASHBOARD',
-      active: true,
+      path: "/dashboard",
       hasSubmenu: false
     },
     {
       icon: Package,
-      label: 'ALL PRODUCTS',
-      active: false,
+      label: 'ALL PRODUCTS',      
+      path: "/all-products",
       hasSubmenu: false
     },
     {
       icon: ClipboardList,
       label: 'ORDER LIST',
-      active: false,
+      path: "/orders",
       hasSubmenu: false
     },
     {
       label: 'Categories',
-      active: false,
       hasSubmenu: true,
       isOpen: categoriesOpen,
       onClick: () => setCategoriesOpen(!categoriesOpen)
@@ -44,7 +44,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     {
       icon: Settings,
       label: 'CUSTOMISE PAGE',
-      active: false,
       hasSubmenu: true,
       isOpen: customiseOpen,
       onClick: () => setCustomiseOpen(!customiseOpen)
@@ -71,11 +70,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         {/* Logo Section */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div className="flex items-center space-x-2">
-            <div className="bg-white rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">
-                <img src={logo} alt="Logo" className="w-9 h-10 " />
-              </span>
-            </div>
+            <img src={logo} alt="Logo" className="w-9 h-10" />
           </div>
           <button 
             className="lg:hidden p-1"
@@ -89,38 +84,43 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <nav className="flex-1 py-4">
           {sidebarItems.map((item, index) => (
             <div key={index}>
-              <div 
-                className={`
-                  flex items-center justify-between px-4 py-3 mx-2 rounded-lg cursor-pointer transition-colors
-                  ${item.active 
-                    ? 'bg-orange-400 text-white' 
-                    : 'text-gray-600 hover:bg-gray-100'
-                  }
-                `}
-                onClick={item.onClick}
-              >
-                <div className="flex items-center space-x-3">
-                  {item.icon && (
-                    <item.icon 
-                      size={18} 
-                      className={item.active ? 'text-white' : 'text-gray-600'} 
-                    />
-                  )}
-                  <span className="font-medium text-sm">
-                    {item.label}
-                  </span>
-                </div>
-                {item.hasSubmenu && (
-                  <div className="transition-transform duration-200">
-                    {item.isOpen ? (
-                      <ChevronDown size={16} className={item.active ? 'text-white' : 'text-gray-600'} />
-                    ) : (
-                      <ChevronRight size={16} className={item.active ? 'text-white' : 'text-gray-600'} />
-                    )}
+              {item.path ? (
+                <Link
+                  to={item.path}
+                  className={`
+                    flex items-center justify-between px-4 py-3 mx-2 rounded-lg cursor-pointer transition-colors
+                    text-gray-600 hover:bg-gray-100
+                  `}
+                >
+                  <div className="flex items-center space-x-3">
+                    {item.icon && <item.icon size={18} className="text-gray-600" />}
+                    <span className="font-medium text-sm">{item.label}</span>
                   </div>
-                )}
-              </div>
-              
+                </Link>
+              ) : (
+                <div
+                  className={`
+                    flex items-center justify-between px-4 py-3 mx-2 rounded-lg cursor-pointer transition-colors
+                    text-gray-600 hover:bg-gray-100
+                  `}
+                  onClick={item.onClick}
+                >
+                  <div className="flex items-center space-x-3">
+                    {item.icon && <item.icon size={18} className="text-gray-600" />}
+                    <span className="font-medium text-sm">{item.label}</span>
+                  </div>
+                  {item.hasSubmenu && (
+                    <div className="transition-transform duration-200">
+                      {item.isOpen ? (
+                        <ChevronDown size={16} className="text-gray-600" />
+                      ) : (
+                        <ChevronRight size={16} className="text-gray-600" />
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Submenu for Categories */}
               {item.label === 'Categories' && item.isOpen && (
                 <div className="ml-8 mt-1 space-y-1">
@@ -132,18 +132,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   </div>
                   <div className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded cursor-pointer">
                     Books
-                  </div>
-                </div>
-              )}
-
-              {/* Submenu for Customise Page */}
-              {item.label === 'CUSTOMISE PAGE' && item.isOpen && (
-                <div className="ml-8 mt-1 space-y-1">
-                  <div className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded cursor-pointer">
-                    Home Page
-                  </div>
-                  <div className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded cursor-pointer">
-                    <Link to="/customize/home/hero">Hero Section</Link>
                   </div>
                 </div>
               )}

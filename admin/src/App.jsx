@@ -1,9 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/login";
+import Login from "./components/basics/login";
 import Dashboard from "./components/dashboard";
-import Sidebar from "./components/sidebar";
-import Topbar from "./components/topbar";
-import CarouselManager from "./components/pages/CarouselManager";
+import Sidebar from "./components/basics/sidebar";
+import Topbar from "./components/basics/topbar";
+import CarouselManager from "./components/editablepages/CarouselManager";
+import AllProducts from "./components/allproducts";
+import AddProduct from "./components/addproduct";
+import EditProduct from "./components/EditProduct";
 
 function PrivateRoute({ children }) {
   const isAuth = localStorage.getItem("adminAuth");
@@ -36,6 +39,38 @@ function App() {
           <PrivateRoute>
             <AdminLayout>
               <Dashboard />
+            </AdminLayout>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/all-products"
+        element={
+          <PrivateRoute>
+            <AdminLayout>
+              <AllProducts />
+            </AdminLayout>
+          </PrivateRoute>
+        }
+      />
+       <Route
+        path="/add-product"
+        element={
+          <PrivateRoute>
+            <AdminLayout>
+              <AddProduct />
+            </AdminLayout>
+          </PrivateRoute>
+        }
+      />
+
+       <Route
+        path="/edit-product"
+        element={
+          <PrivateRoute>
+            <AdminLayout>
+              <EditProduct />
             </AdminLayout>
           </PrivateRoute>
         }

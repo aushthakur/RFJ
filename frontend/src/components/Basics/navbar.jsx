@@ -9,12 +9,12 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', href: '.' },
     { name: 'Best Sellers', href: '/bestseller' },
-    { name: 'Earrings', href: 'earrings' },
-    { name: 'Necklaces', href: '#' },
-    { name: 'Festive Special', href: '#' },
+    { name: 'Earrings', href: '/earrings' },
+    { name: 'Necklaces', href: '/necklaces' },
+    { name: 'Festive Special', href: '/festival' },
     { name: 'Categories', href: '#', hasDropdown: true },
-    { name: 'Customize', href: '#' },
-    { name: 'Gifting', href: '#' }
+    { name: 'Customize', href: '/customize' },
+    { name: 'Gifting', href: '/gifting' }
   ];
 
   return (
