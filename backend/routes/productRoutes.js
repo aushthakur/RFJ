@@ -71,18 +71,147 @@ router.post("/", upload.array("images", 5), async (req, res) => {
   }
 });
 
-// @route   GET /api/products
-// @desc    Fetch all products
-router.get("/", async (req, res) => {
+// @route   GET /api/products/filter/categories
+// @desc    Get all unique categories
+router.get("/filter/categories", async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 });
+    const categories = await Product.distinct("category");
+    res.json(categories);
+  } catch (err) {
+    console.error("Error fetching categories:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// @route   GET /api/products/filter/bestsellers
+// @desc    Get bestseller products only
+router.get("/filter/bestsellers", async (req, res) => {
+  try {
+    const products = await Product.find({ bestSeller: true }).sort({
+      createdAt: -1,
+    });
     res.json(products);
   } catch (err) {
+    console.error("Error fetching bestsellers:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// @route   GET /api/products/trending
+// @desc    Fetch trending products
+router.get("/trending", async (req, res) => {
+  try {
+    const trendingProducts = await Product.find({ trending: true }).sort({ createdAt: -1 });
+    res.json(trendingProducts);
+  } catch (err) {
+    console.error("Error fetching trending products:", err);
+    res.status(500).json({ message: "Server error while fetching trending products" });
+  }
+});
+
+// @route   GET /api/products/search
+// @desc    Search products
+router.get('/search', async (req, res) => {
+  const query = req.query.query || '';
+  console.log("Search query:", query);
+
+  if (!query) return res.json([]);
+
+  try {
+    const products = await Product.find({
+      name: { $regex: query, $options: 'i' }
+    }).limit(10);
+
+    console.log("Products found:", products.length);
+    res.json(products);
+  } catch (err) {
+    console.error("Search route error:", err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+// @route   GET /api/products
+// @desc    Fetch all products with filters
+router.get("/", async (req, res) => {
+  try {
+    const {
+      category,
+      minPrice,
+      maxPrice,
+      bestSeller,
+      trending,
+      festiveSpecial,
+      newArrival,
+      search,
+      sort,
+    } = req.query;
+
+    // Build filter object
+    let filter = {};
+
+    // Category filter - handle both single and multiple categories
+    if (category) {
+      const categories = category.split(',').map(cat => cat.trim());
+      filter.category = { $in: categories };
+    }
+
+    // Price range filter
+    if (minPrice || maxPrice) {
+      filter.salePrice = {};
+      if (minPrice) filter.salePrice.$gte = Number(minPrice);
+      if (maxPrice) filter.salePrice.$lte = Number(maxPrice);
+    }
+
+    // Boolean filters
+    if (bestSeller === "true") filter.bestSeller = true;
+    if (trending === "true") filter.trending = true;
+    if (newArrival === "true") filter.newArrival = true;
+    if (festiveSpecial) filter.festiveSpecial = festiveSpecial;
+
+    // Search filter
+    if (search) {
+      filter.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+        { tags: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // Build sort object
+    let sortOption = {};
+    if (sort === "price-low-high") {
+      sortOption.salePrice = 1;
+    } else if (sort === "price-high-low") {
+      sortOption.salePrice = -1;
+    } else if (sort === "newest") {
+      sortOption.createdAt = -1;
+    } else {
+      sortOption.createdAt = -1; // default
+    }
+
+    const products = await Product.find(filter).sort(sortOption);
+    res.json(products);
+  } catch (err) {
+    console.error("Error fetching products:", err);
     res.status(500).json({ message: "❌ Error fetching products" });
   }
 });
 
-// DELETE /api/products/:id
+// @route   GET /api/products/:id
+// @desc    Fetch single product by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+    res.json(product);
+  } catch (err) {
+    console.error("Error fetching product:", err);
+    res.status(500).json({ message: "Server error while fetching product" });
+  }
+});
+
+// @route   DELETE /api/products/:id
+// @desc    Delete a product
 router.delete("/:id", async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
@@ -96,8 +225,8 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-
-// UPDATE product
+// @route   PUT /api/products/:id
+// @desc    Update product
 router.put("/:id", upload.array("images", 5), async (req, res) => {
   try {
     const updateData = { ...req.body };
@@ -120,17 +249,6 @@ router.put("/:id", upload.array("images", 5), async (req, res) => {
     res.json({ message: "✅ Product updated successfully", product });
   } catch (err) {
     res.status(500).json({ message: "❌ Error updating product" });
-  }
-});
-
-// @route   GET /api/products/trending
-router.get("/trending", async (req, res) => {
-  try {
-    const trendingProducts = await Product.find({ trending: true }).sort({ createdAt: -1 });
-    res.json(trendingProducts);
-  } catch (err) {
-    console.error("Error fetching trending products:", err);
-    res.status(500).json({ message: "Server error while fetching trending products" });
   }
 });
 

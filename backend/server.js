@@ -4,10 +4,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+
+import authRoutes from "./routes/auth.js";
 import carouselRoutes from "./routes/carouselRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
-
-
+import paymentRoutes from "./routes/paymentRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
 
@@ -27,16 +29,16 @@ app.get("/", (req, res) => {
 });
 
 // API Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/carousel", carouselRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/payment", paymentRoutes);
+app.use("/api/orders", orderRoutes);
 
-
-// Serve static uploads (absolute path)
+// Serve static uploads
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-
 
 // Start Server
 const PORT = process.env.PORT || 5000;
