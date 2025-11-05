@@ -34,7 +34,16 @@ app.use("/api/carousel", carouselRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/orders", orderRoutes);
-
+app.use(cors({
+  origin: [
+    'https://www.ritualfinejwellery.com',
+    'https://ritualfinejwellery.com',
+    'http://localhost:3000' // for local development
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
